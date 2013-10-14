@@ -285,7 +285,7 @@ object EcosystemBuildsMavenProjects {
       <packaging>eclipse-update-site</packaging>
       <properties>
         <encoding>UTF-8</encoding>
-        <tycho.version>0.15.0</tycho.version>
+        <tycho.version>0.18.1</tycho.version>
         <!-- p2 repositories location -->
         <repo.eclipse.indigo>http://download.eclipse.org/releases/indigo/</repo.eclipse.indigo>
         <!-- dependencies repos -->
@@ -293,10 +293,10 @@ object EcosystemBuildsMavenProjects {
       </properties>
       <repositories>
         <repository>
-          <id>eclipse.{ scalaIDEVersion.eclipseVersion.id }</id>
+          <id>eclipse.{ (scalaIDEVersion.eclipseVersion getOrElse (EclipseVersion.Default)).id }</id>
           <name>Eclipse p2 repository</name>
           <layout>p2</layout>
-          <url>{ scalaIDEVersion.eclipseVersion.repoLocation }</url>
+          <url>{ (scalaIDEVersion.eclipseVersion getOrElse (EclipseVersion.Default)).repoLocation }</url>
         </repository>
         <repository>
           <id>scalaide.repo</id>
@@ -355,14 +355,14 @@ object EcosystemBuildsMavenProjects {
       <packaging>eclipse-update-site</packaging>
       <properties>
         <encoding>UTF-8</encoding>
-        <tycho.version>0.15.0</tycho.version>
+        <tycho.version>0.18.1</tycho.version>
       </properties>
       <repositories>
         <repository>
-          <id>eclipse.{ scalaIDEVersion.eclipseVersion.id }</id>
+          <id>eclipse.{ (scalaIDEVersion.eclipseVersion getOrElse (EclipseVersion.Default)).id }</id>
           <name>Eclipse p2 repository</name>
           <layout>p2</layout>
-          <url>{ scalaIDEVersion.eclipseVersion.repoLocation }</url>
+          <url>{ (scalaIDEVersion.eclipseVersion getOrElse (EclipseVersion.Default)).repoLocation }</url>
         </repository>
         <repository>
           <id>scalaide.repo</id>

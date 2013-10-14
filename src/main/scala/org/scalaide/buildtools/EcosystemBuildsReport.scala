@@ -150,7 +150,7 @@ h4 {margin: 0.2em 0 0 0; margin-right: 3em;}
       <h3>{ scalaIDEVersion.version }{ if (zipped) <span class="zipped"> zipped</span> }</h3>
       <div class="scalaIDEVersionDetails">
       <p>{
-          if (scalaIDEVersion.scalaVersion == UndefinedVersion)
+          if (scalaIDEVersion.scalaVersion.isEmpty)
             "no Scala version"
           else
             "on Scala %s".format(scalaIDEVersion.scalaVersion)

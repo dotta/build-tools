@@ -35,10 +35,6 @@ object Ecosystem {
   /** regex to find the root option in the command line */
   val RootOption = "--root=(.*)".r
 
-  val RangeRegex = """[\[\(]([^,]*),([^\]\)]*)[\]\)]""".r
-  
-  val UndefinedVersion = new Version(0, 0, 0)
-  
   /** regex to find the given bundle id dependency in a manifest file */
   def idInManifest(id: String) = ("(.*" + id + ")(,?.*)").r
   /** regex to find the given bundle id dependency, with a version number defined, in a manifest file */
@@ -93,35 +89,6 @@ object Ecosystem {
 
   private def warning(message: String) {
     println("WARNING: %s".format(message))
-  }
-
-  object EclipseVersion {
-    def apply(range: String): Option[EclipseVersion] = {
-      range match {
-        case RangeRegex(low, high) =>
-          val v = new Version(low)
-          if (v.getMajor() == 3 && v.getMinor() < 8) {
-            Some(EclipseIndigo)
-          } else {
-            Some(EclipseJuno)
-          }
-      }
-    }
-  }
-
-  abstract class EclipseVersion(val id: String, val name: String, val repoLocation: String)
-
-  case object EclipseIndigo extends EclipseVersion("indigo", "Indigo", "http://download.eclipse.org/releases/indigo/")
-
-  case object EclipseJuno extends EclipseVersion("juno", "Juno", "http://download.eclipse.org/releases/juno/")
-
-  def findStrictVersion(range: String) = {
-    range match {
-      case RangeRegex(low, high) if (low == high) =>
-        new Version(low)
-      case _ =>
-        UndefinedVersion
-    }
   }
 
 }

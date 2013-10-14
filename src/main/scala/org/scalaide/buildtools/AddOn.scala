@@ -2,16 +2,17 @@ package org.scalaide.buildtools
 
 import org.osgi.framework.Version
 import Ecosystem._
+import org.osgi.framework.VersionRange
 
 case class AddOn(conf: PluginDescriptor, iu: InstallableUnit, repository: P2Repository) {
   
   // TODO: need to check for missing information
   
-  lazy val scalaIDEVersion: Version = findStrictVersion(findDependency(ScalaIDEFeatureIdOsgi).get.range)
+  lazy val scalaIDEVersion: Option[VersionRange] = findDependency(ScalaIDEFeatureIdOsgi).map(d => new VersionRange(d.range))
   
-  val version = iu.version
+  val version: Version = iu.version
   
-  def id= conf.featureId
+  def id: String = conf.featureId
   
-  private def findDependency(id: String) = iu.dependencies.find(_.id == id)
+  private def findDependency(id: String): Option[DependencyUnit] = iu.dependencies.find(_.id == id)
 }
